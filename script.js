@@ -41,10 +41,21 @@ if (language === 'finnish') {
 
 // Store notes in diffrent variables
 document.getElementById('save').addEventListener('click', () => {
-  svNote = document.getElementById('textarea-sv').value
-  fiNote = document.getElementById('textarea-fi').value
-  saveNotes(svNote, fiNote)
-  createLi(svNote, fiNote)
+  if ((document.getElementById('textarea-sv').value) && (document.getElementById('textarea-fi').value)) {
+    svNote = document.getElementById('textarea-sv').value
+    fiNote = document.getElementById('textarea-fi').value
+    document.getElementById('textarea-sv').value = ''
+    document.getElementById('textarea-fi').value = ''
+
+    saveNotes(svNote, fiNote)
+    createLi(svNote, fiNote)
+  } else {
+    if (localStorage.getItem('language') == 'swedish') {
+      alert('Ej godkänt!')
+    } else {
+      alert('Ei hyväksytty!')
+    }
+  }
 })
 
 // Store notes in localstorage
